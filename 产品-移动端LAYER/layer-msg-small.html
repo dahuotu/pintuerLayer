@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>模块</title>
+		<link rel="stylesheet" href="css/pintuer.layer.m.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<div id="demo">
+			<button id="btnTest">测试</button>
+		</div>
+		<!--div class="pintuer-layer">
+			<div class="mask"></div>
+			<div class="layer layer-msg">
+				<div class="msg small">网络异常</div>
+			</div>
+		</div-->
+	</body>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/pintuer.layer.m.js"></script>
+	<script>
+		$("#btnTest").click(function() {
+			pintuer.dialogMsg('1');
+			/*
+			pintuer.dialogMsg({
+				"skin": "small",
+				"msg": "牛叉",
+				"time": "1500",
+			});
+			*/
+		});
+
+		var pintuer = {
+			"skin": "msg",
+			"show": "",
+			"time": "1000",
+			"msg": "",
+			"baseHtml": "",
+			dialogMsg: function(text) {
+				if(pintuer.isJson(text) == false) {
+					pintuer.msg = text;
+				} else {
+					pintuer.skin = text.skin;
+					pintuer.msg = text.msg;
+					pintuer.time = text.time;
+				}
+				var baseHtml = "";
+				baseHtml += "<div class=\"pintuer-layer\">";
+				baseHtml += "    <div class=\"mask\" onclick=\"pintuer.dialogHide()\"></div>";
+				baseHtml += "    <div class=\"layer layer-msg\" onclick=\"pintuer.dialogHide()\">";
+				if(pintuer.skin == "small") {
+					baseHtml += "        <div class=\"msg small\">" + pintuer.msg + "</div>";
+				} else {
+					baseHtml += "        <div class=\"msg\">" + pintuer.msg + "</div>";
+				}
+				baseHtml += "    </div>";
+				baseHtml += "</div>";
+
+				$("body").append(baseHtml);
+				if(pintuer.time != "") {
+					pintuer.animateShow();
+				} else {
+					pintuer.animateShow();
+				}
+			},
+			dialogShow: function() {
+				$(".pintuer-layer .mask,.pintuer-layer .layer").addClass("show");
+			},
+			dialogHide: function() {
+				$(".pintuer-layer .mask,.pintuer-layer .layer").removeClass("show");
+			},
+			animateShow: function() {
+				pintuer.dialogShow();
+				setTimeout(function() {
+					pintuer.dialogHide();
+				}, pintuer.time);
+			},
+			isJson: function(str) {
+				if(typeof str == 'string') {
+					try {
+						var obj = JSON.parse(str);
+						if(typeof obj == 'object' && obj) {
+							return true;
+						} else {
+							return false;
+						}
+
+					} catch(e) {
+						console.log('error：' + str + '!!!' + e);
+						return false;
+					}
+				}
+			}
+		}
+	</script>
+
+</html>

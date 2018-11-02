@@ -1,0 +1,73 @@
+/*基础*/
+.pintuer-layer {}
+
+
+/*主要容器*/
+.pintuer-layer .mask,
+.pintuer-layer .layer {
+	display: none;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: fixed;
+}
+
+/*遮罩层*/
+.pintuer-layer .mask {
+	z-index: 888;
+}
+
+
+/*内容层*/
+.pintuer-layer .layer {
+	z-index: 999;
+}
+
+
+/*消息提示*/
+.pintuer-layer .layer-msg {
+	justify-content: center;
+	align-items: center;
+	display: -webkit-flex;
+	display: none;
+}
+
+
+/*默认消息提醒样式*/
+.pintuer-layer .layer-msg .msg {
+	width: auto;
+	height: auto;
+	border-radius: 0.2rem;
+	border: none;
+	background: #000;
+	color: #fff;
+	opacity: 0.8;
+	font-size: 0.32rem;
+	padding: 0.2rem;
+	max-width: 80%;
+	min-width: 50%;
+	min-height: 1rem;
+	justify-content: center;
+	align-items: center;
+	display: -webkit-flex;
+}
+
+
+/*精美小样式*/
+.pintuer-layer .layer .small {
+	min-height: 0.8rem;
+	line-height: 0.8rem;
+	max-width: 70%;
+	font-size: 0.32rem;
+	min-width: 1.4rem;
+	width: auto;
+	padding: 0 0.3rem;
+	height: auto;
+	max-height: 0.8rem;
+}
+
+/*动画及操作*/
+.pintuer-layer .show{
+	display: -webkit-flex;
+}
