@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>加载提示</title>
+		<link rel="stylesheet" href="css/pintuer.layer.m.css" />
+		<script type="text/javascript" src="js/pintuer.layer.m.js"></script>
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<div id="demo">
+			<button id="btnTest1">全屏加载</button>
+			<button id="btnTest2">局部加载</button>
+		</div>
+		<div id="demo-penal">
+			
+		</div>
+		<!--
+		<div class="pintuer-layer">
+			<div class="mask"></div>
+			<div class="layer layer-loading">
+				<div class="loading">
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</div>
+		-->
+	</body>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/pintuer.layer.m.js"></script>
+	<script>
+		$("#btnTest1").click(function() {
+			pintuer.dialogLoading();
+		});
+		
+		$("#btnTest2").click(function() {
+			pintuer.dialogLoading({
+				"id": "#demo-penal",
+			});
+		});
+		
+	</script>
+</html>
+<!--
+	作者：1979788761@qq.com
+	时间：2018-11-17
+	描述：其他风格样式
+	https://www.jianshu.com/p/6ac3e3e12d61
+	https://www.cnblogs.com/youyouluo/p/6937304.html
+	http://www.woshipm.com/pd/439810.html
+-->

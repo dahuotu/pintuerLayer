@@ -66,8 +66,58 @@
 	height: auto;
 	max-height: 0.8rem;
 }
+/*默认加载loading*/
+.layer-loading{
+	justify-content: center;
+	align-items: center;
+	display: -webkit-flex;
+	display: none;
+	background: #fff;
+}
+
+.layer-loading .loading{
+	width: 50%;
+	height: 0.35rem;
+	margin: 0 auto;
+	position: relative;
+}
+.layer-loading .loading span{
+	position: absolute;
+	width: 15px;
+	height: 100%;
+	border-radius: 50%;
+	background: lightgreen;
+	-webkit-animation: load 1.04s ease-in infinite alternate;
+}
+@-webkit-keyframes load{
+	0%{
+		opacity: 1;
+		-webkit-transform: translate(0px);
+	}
+	100%{
+		opacity: 0.2;
+		-webkit-transform: translate(150px);
+	}
+}
+.layer-loading .loading span:nth-child(1){
+	-webkit-animation-delay:0.13s;
+}
+.layer-loading .loading span:nth-child(2){
+	-webkit-animation-delay:0.26s;
+}
+.layer-loading .loading span:nth-child(3){
+	-webkit-animation-delay:0.39s;
+}
+.layer-loading .loading span:nth-child(4){
+	-webkit-animation-delay:0.52s;
+}
+.layer-loading .loading span:nth-child(5){
+	-webkit-animation-delay:0.65s;
+}
+
 
 /*动画及操作*/
 .pintuer-layer .show{
 	display: -webkit-flex;
 }
+

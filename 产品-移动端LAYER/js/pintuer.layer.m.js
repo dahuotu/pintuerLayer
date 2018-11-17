@@ -6,7 +6,8 @@
  * 2、designWidth 自定义设计稿的宽度
  * 3、maxWidth 最大宽度
  */
-;(function(designWidth, maxWidth) {
+;
+(function(designWidth, maxWidth) {
 	var doc = document,
 		win = window,
 		docEl = doc.documentElement,
@@ -48,3 +49,104 @@
 		}, false);
 	}
 })(750, 750);
+
+var pintuer = {
+	"id": "",
+	"skin": "msg",
+	"show": "",
+	"time": "1000",
+	"msg": "",
+	"baseHtml": "",
+	dialogMsg: function(text) {
+		if(pintuer.isJson(text) == false) {
+			pintuer.msg = text;
+		} else {
+			pintuer.skin = text.skin;
+			pintuer.msg = text.msg;
+			pintuer.time = text.time;
+		}
+		var baseHtml = "";
+		baseHtml += "<div class=\"pintuer-layer\">";
+		baseHtml += "    <div class=\"mask\" onclick=\"pintuer.dialogHide()\"></div>";
+		baseHtml += "    <div class=\"layer layer-msg\" onclick=\"pintuer.dialogHide()\">";
+		if(pintuer.skin == "small") {
+			baseHtml += "        <div class=\"msg small\">" + pintuer.msg + "</div>";
+		} else {
+			baseHtml += "        <div class=\"msg\">" + pintuer.msg + "</div>";
+		}
+		baseHtml += "    </div>";
+		baseHtml += "</div>";
+
+		$("body").append(baseHtml);
+		if(pintuer.time != "") {
+			pintuer.animateShow();
+		} else {
+			pintuer.animateShow();
+		}
+	},
+	dialogShow: function() {
+		$(".pintuer-layer .mask,.pintuer-layer .layer").addClass("show");
+	},
+	dialogHide: function() {
+		$(".pintuer-layer .mask,.pintuer-layer .layer").removeClass("show");
+		$(".pintuer-layer").remove();
+	},
+	animateShow: function() {
+		pintuer.dialogShow();
+		setTimeout(function() {
+			pintuer.dialogHide();
+			$(".pintuer-layer").remove();
+		}, pintuer.time);
+	},
+	dialogLoading: function(text) {
+		var baseHtml = "";
+
+		if(pintuer.isJson(text) == false || text == undefined) {
+			baseHtml += "<div class=\"pintuer-layer\">";
+			baseHtml += "    <div class=\"mask\"></div>";
+			baseHtml += "    <div class=\"layer layer-loading\">";
+			baseHtml += "        <div class=\"loading\">";
+			baseHtml += "            <span></span>";
+			baseHtml += "            <span></span>";
+			baseHtml += "            <span></span>";
+			baseHtml += "            <span></span>";
+			baseHtml += "            <span></span>";
+			baseHtml += "        </div>";
+			baseHtml += "    </div>";
+			baseHtml += "</div>";
+			$("body").append(baseHtml);
+		} else {
+			baseHtml += "<div class=\"pintuer-layer\">";
+			baseHtml += "    <div class=\"layer layer-loading\" style=\"position: relative;width: 100%;height: 6.4rem;\">";
+			baseHtml += "        <div class=\"loading\">";
+			baseHtml += "            <span></span>";
+			baseHtml += "            <span></span>";
+			baseHtml += "            <span></span>";
+			baseHtml += "            <span></span>";
+			baseHtml += "            <span></span>";
+			baseHtml += "        </div>";
+			baseHtml += "    </div>";
+			baseHtml += "</div>";
+			pintuer.id = text.id;
+			$(pintuer.id).html(baseHtml);
+		}
+		pintuer.dialogShow();
+
+	},
+	isJson: function(str) {
+		if(typeof str == 'string') {
+			try {
+				var obj = JSON.parse(str);
+				if(typeof obj == 'object' && obj) {
+					return true;
+				} else {
+					return false;
+				}
+
+			} catch(e) {
+				console.log('error：' + str + '!!!' + e);
+				return false;
+			}
+		}
+	}
+}

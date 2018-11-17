@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<title>模块</title>
+		<title>消息提示</title>
 		<link rel="stylesheet" href="css/pintuer.layer.m.css" />
 		<style type="text/css">
 
@@ -37,70 +37,7 @@
 				"time": "1500",
 			});
 		});
-
-		var pintuer = {
-			"skin": "msg",
-			"show": "",
-			"time": "1000",
-			"msg": "",
-			"baseHtml": "",
-			dialogMsg: function(text) {
-				if(pintuer.isJson(text) == false) {
-					pintuer.msg = text;
-				} else {
-					pintuer.skin = text.skin;
-					pintuer.msg = text.msg;
-					pintuer.time = text.time;
-				}
-				var baseHtml = "";
-				baseHtml += "<div class=\"pintuer-layer\">";
-				baseHtml += "    <div class=\"mask\" onclick=\"pintuer.dialogHide()\"></div>";
-				baseHtml += "    <div class=\"layer layer-msg\" onclick=\"pintuer.dialogHide()\">";
-				if(pintuer.skin == "small") {
-					baseHtml += "        <div class=\"msg small\">" + pintuer.msg + "</div>";
-				} else {
-					baseHtml += "        <div class=\"msg\">" + pintuer.msg + "</div>";
-				}
-				baseHtml += "    </div>";
-				baseHtml += "</div>";
-
-				$("body").append(baseHtml);
-				if(pintuer.time != "") {
-					pintuer.animateShow();
-				} else {
-					pintuer.animateShow();
-				}
-			},
-			dialogShow: function() {
-				$(".pintuer-layer .mask,.pintuer-layer .layer").addClass("show");
-			},
-			dialogHide: function() {
-				$(".pintuer-layer .mask,.pintuer-layer .layer").removeClass("show");
-			},
-			animateShow: function() {
-				pintuer.dialogShow();
-				setTimeout(function() {
-					pintuer.dialogHide();
-					$(".pintuer-layer").remove();
-				}, pintuer.time);
-			},
-			isJson: function(str) {
-				if(typeof str == 'string') {
-					try {
-						var obj = JSON.parse(str);
-						if(typeof obj == 'object' && obj) {
-							return true;
-						} else {
-							return false;
-						}
-
-					} catch(e) {
-						console.log('error：' + str + '!!!' + e);
-						return false;
-					}
-				}
-			}
-		}
+		
 	</script>
 
 </html>
