@@ -18,15 +18,16 @@
 	z-index: 888;
 }
 
-
 /*内容层*/
 .pintuer-layer .layer {
 	z-index: 999;
 }
-
+/*基础层*/
+.layer-base {
+}
 
 /*消息提示*/
-.pintuer-layer .layer-msg {
+.layer-msg {
 	justify-content: center;
 	align-items: center;
 	display: -webkit-flex;
@@ -35,7 +36,7 @@
 
 
 /*默认消息提醒样式*/
-.pintuer-layer .layer-msg .msg {
+.layer-msg .msg {
 	width: auto;
 	height: auto;
 	border-radius: 0.2rem;
@@ -55,7 +56,7 @@
 
 
 /*精美小样式*/
-.pintuer-layer .layer .small {
+.layer .small {
 	min-height: 0.8rem;
 	line-height: 0.8rem;
 	max-width: 70%;
@@ -66,7 +67,7 @@
 	height: auto;
 	max-height: 0.8rem;
 }
-/*默认加载loading*/
+/*默认加载loading样式*/
 .layer-loading{
 	justify-content: center;
 	align-items: center;
@@ -115,6 +116,35 @@
 	-webkit-animation-delay:0.65s;
 }
 
+
+/*无数据相关提示*/
+.layer-not {
+	justify-content: center;
+	align-items: center;
+	display: -webkit-flex;
+}
+
+
+/*无数据提醒样式*/
+.layer-not .notdata {
+	padding: 0.5rem;
+}
+
+.layer-not .notdata .pic {
+	/*没有数据默认提示样式*/
+	width: 2.28rem;
+	height: 1.92rem;
+	background: url('../img/icon-nodata.png') #fff no-repeat;
+	background-size: cover;
+}
+
+.layer-not .notdata .msg {
+	width: 100%;
+	color: #999999;
+	font-size: 0.32rem;
+	text-align: center;
+	margin-top: 0.38rem;
+}
 
 /*动画及操作*/
 .pintuer-layer .show{

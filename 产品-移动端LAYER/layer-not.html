@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<title>基础模块-底层部分</title>
+		<title>信息提示</title>
 		<link rel="stylesheet" href="css/pintuer.layer.m.css" />
 		<script type="text/javascript" src="js/pintuer.layer.m.js"></script>
 		<style type="text/css">
@@ -14,17 +14,21 @@
 
 	<body>
 		<div id="demo">
-			<button id="btnTest1">默认风格基础层</button>
-			<button id="btnTest2">自定义风格基础层</button>
+			<button id="btnTest1">默认全屏显示无数据</button>
+			<button id="btnTest2">自定义全屏显示无数据</button>
+			<button id="btnTest3">指定元素局部显示无数据</button>
+		</div>
+		<div id="demo-penal">
+
 		</div>
 		<!--
 		<div class="pintuer-layer">
-			<div class="mask show"></div>
-			<div class="layer">
-				弹层基础设置
-			</div>
-			<div class="layer layer-msg">
-				<div class="msg">网络异常</div>
+			<div class="mask"></div>
+			<div class="layer layer-not">
+				<div class="notdata">
+					<div class="pic"></div>
+					<div class="msg">暂无数据</div>
+				</div>
 			</div>
 		</div>
 		-->
@@ -33,14 +37,21 @@
 	<script type="text/javascript" src="js/pintuer.layer.m.js"></script>
 	<script>
 		$("#btnTest1").click(function() {
-			pintuer.base();
+			pintuer.not("暂无数据");
 		});
 
 		$("#btnTest2").click(function() {
-			pintuer.base({
-				"skin":"",//设置皮肤
-				"mask":"hide",//是否显示遮罩层及配置遮罩层效果
-				"html":"很牛逼的插件",//设置内容
+			pintuer.not({
+				"class": "notdata",
+				"msg": "真的暂无数据"
+			});
+		});
+		
+		$("#btnTest3").click(function() {
+			pintuer.not({
+				"id":"#demo-penal",
+				"class": "notdata",
+				"msg": "真的暂无数据"
 			});
 		});
 	</script>

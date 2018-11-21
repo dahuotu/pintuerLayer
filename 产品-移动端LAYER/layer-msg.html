@@ -14,30 +14,31 @@
 	<body>
 		<div id="demo">
 			<button id="btnTest1">默认风格测试</button>
-			<button id="btnTest2">默认风格测试</button>
+			<button id="btnTest2">自定义风格，时间消息提示测试</button>
 		</div>
-		<!--div class="pintuer-layer">
+		<!--
+		<div class="pintuer-layer">
 			<div class="mask"></div>
 			<div class="layer layer-msg">
 				<div class="msg small">网络异常</div>
 			</div>
-		</div-->
+		</div>
+		-->
 	</body>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/pintuer.layer.m.js"></script>
 	<script>
 		$("#btnTest1").click(function() {
-			pintuer.dialogMsg('1');
+			pintuer.msg('1');
 		});
-		
+
 		$("#btnTest2").click(function() {
-			pintuer.dialogMsg({
-				"skin": "small",
+			pintuer.msg({
+				"class": "small",
 				"msg": "牛叉",
 				"time": "1500",
 			});
 		});
-		
 	</script>
 
 </html>

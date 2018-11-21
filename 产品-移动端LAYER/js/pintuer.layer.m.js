@@ -51,57 +51,102 @@
 })(750, 750);
 
 var pintuer = {
-	"id": "",
-	"skin": "msg",
-	"show": "",
-	"time": "1000",
-	"msg": "",
-	"baseHtml": "",
-	dialogMsg: function(text) {
-		if(pintuer.isJson(text) == false) {
-			pintuer.msg = text;
-		} else {
-			pintuer.skin = text.skin;
-			pintuer.msg = text.msg;
-			pintuer.time = text.time;
-		}
+	"skin": "layer-base", //皮肤 基础样式
+	"mask": "show", //显示遮罩层样式
+	"html": "test", //内容
+	"msg": {
+		"msg": "",
+		"class": "",
+		"time": "2000",
+	},
+	"not": {
+		"id": "",
+		"msg": "",
+		"class": "",
+	},
+	base: function(val) {
 		var baseHtml = "";
-		baseHtml += "<div class=\"pintuer-layer\">";
-		baseHtml += "    <div class=\"mask\" onclick=\"pintuer.dialogHide()\"></div>";
-		baseHtml += "    <div class=\"layer layer-msg\" onclick=\"pintuer.dialogHide()\">";
-		if(pintuer.skin == "small") {
-			baseHtml += "        <div class=\"msg small\">" + pintuer.msg + "</div>";
-		} else {
-			baseHtml += "        <div class=\"msg\">" + pintuer.msg + "</div>";
+		if(val != undefined) {
+			if(pintuer.isjson(val) != false) {
+				//参数赋值
+				pintuer.skin = val.skin.length > 0 ? val.skin : pintuer.skin;
+				pintuer.mask = val.mask.length > 0 ? val.mask : pintuer.mask;
+				pintuer.html = val.html.length > 0 ? val.html : pintuer.html;
+			} else {
+				console.log('error:不正确的调用参数json(' + val + ')');
+			}
 		}
-		baseHtml += "    </div>";
+		baseHtml += "<div class=\"pintuer-layer\" onclick=\"pintuer.hide()\">";
+		baseHtml += "    <div class=\"mask " + pintuer.mask + "\"></div>";
+		baseHtml += "    <div class=\"layer " + pintuer.skin + "\">" + pintuer.html + "</div>";
 		baseHtml += "</div>";
 
-		$("body").append(baseHtml);
-		if(pintuer.time != "") {
-			pintuer.animateShow();
-		} else {
-			pintuer.animateShow();
+		pintuer.append('', baseHtml);
+	},
+	msg: function(val) {
+		if(val != undefined) {
+			if(pintuer.isjson(val) != false) {
+				//参数赋值
+				pintuer.msg.class = val.class.length > 0 ? val.class : pintuer.msg.class;
+				pintuer.msg.msg = val.msg.length > 0 ? val.msg : pintuer.msg.msg;
+				pintuer.msg.time = val.time.length > 0 ? val.time : pintuer.msg.time;
+			} else {
+				pintuer.msg.class = "";
+				pintuer.msg.msg = val;
+			}
 		}
-	},
-	dialogShow: function() {
-		$(".pintuer-layer .mask,.pintuer-layer .layer").addClass("show");
-	},
-	dialogHide: function() {
-		$(".pintuer-layer .mask,.pintuer-layer .layer").removeClass("show");
-		$(".pintuer-layer").remove();
-	},
-	animateShow: function() {
-		pintuer.dialogShow();
-		setTimeout(function() {
-			pintuer.dialogHide();
-			$(".pintuer-layer").remove();
-		}, pintuer.time);
-	},
-	dialogLoading: function(text) {
-		var baseHtml = "";
 
-		if(pintuer.isJson(text) == false || text == undefined) {
+		var html = "<div class=\"msg " + pintuer.msg.class + "\">" + pintuer.msg.msg + "</div>";
+
+		pintuer.base({
+			"mask": "hide", //是否显示遮罩层及配置遮罩层效果
+			"skin": "layer-msg", //设置皮肤
+			"html": html, //设置内容
+		});
+		pintuer.animate(pintuer.msg.time);
+	},
+	not: function(val) {
+		//无数据提示
+		if(val != undefined) {
+			if(pintuer.isjson(val) != false) {
+				//参数赋值
+				if(val.id == undefined) {
+					pintuer.not.id = "";
+					pintuer.not.class = val.class.length > 0 ? val.class : pintuer.not.class;
+					pintuer.not.msg = val.msg.length > 0 ? val.msg : pintuer.not.msg;
+				} else {
+					pintuer.not.id = val.id.length > 0 ? val.id : pintuer.not.id;
+					pintuer.not.class = val.class.length > 0 ? val.class : pintuer.not.class;
+					pintuer.not.msg = val.msg.length > 0 ? val.msg : pintuer.not.msg;
+				}
+			} else {
+				pintuer.not.id = "";
+				pintuer.not.class = "notdata";
+				pintuer.not.msg = val;
+			}
+		}
+		var html = "";
+		html += "<div class=\"" + pintuer.not.class + "\">";
+		html += "	<div class=\"pic\"></div>";
+		html += "	<div class=\"msg\">" + pintuer.not.msg + "</div>";
+		html += "</div>";
+
+		if(pintuer.not.id.length <= 0) {
+			pintuer.base({
+				"mask": "show", //是否显示遮罩层及配置遮罩层效果
+				"skin": "layer-not", //设置皮肤
+				"html": html, //设置内容
+			});
+		} else {
+			var shtml = "    <div class=\"layer layer-not\">" + html + "</div>";
+			$(pintuer.not.id).html(shtml);
+		}
+		pintuer.show();
+	},
+	loading: function(val) {
+		/*
+		var baseHtml = "";
+		if(pintuer.isjson(val) == false || val == undefined) {
 			baseHtml += "<div class=\"pintuer-layer\">";
 			baseHtml += "    <div class=\"mask\"></div>";
 			baseHtml += "    <div class=\"layer layer-loading\">";
@@ -127,13 +172,36 @@ var pintuer = {
 			baseHtml += "        </div>";
 			baseHtml += "    </div>";
 			baseHtml += "</div>";
-			pintuer.id = text.id;
+			pintuer.id = val.id;
 			$(pintuer.id).html(baseHtml);
 		}
-		pintuer.dialogShow();
-
+		pintuer.show();
+		*/
 	},
-	isJson: function(str) {
+	animate: function(time) {
+		pintuer.show();
+		setTimeout(function() {
+			pintuer.hide();
+		}, time);
+	},
+	show: function() {
+		//显示层
+		$(".pintuer-layer .mask,.pintuer-layer .layer").addClass("show");
+	},
+	hide: function() {
+		//隐藏层
+		$(".pintuer-layer .mask,.pintuer-layer .layer").removeClass("show");
+		pintuer.remove('');
+	},
+	append: function(val, htm) {
+		var ap = val.length > 0 ? val : '';
+		$("body " + val).append(htm);
+	},
+	remove: function(val) {
+		var re = val.length > 0 ? val : '';
+		$(".pintuer-layer " + re).remove();
+	},
+	isjson: function(str) {
 		if(typeof str == 'string') {
 			try {
 				var obj = JSON.parse(str);
@@ -144,7 +212,7 @@ var pintuer = {
 				}
 
 			} catch(e) {
-				console.log('error：' + str + '!!!' + e);
+				console.log('error：' + str + ',' + e);
 				return false;
 			}
 		}
