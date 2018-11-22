@@ -54,10 +54,11 @@ var pintuer = {
 	"skin": "layer-base", //皮肤 基础样式
 	"mask": "show", //显示遮罩层样式
 	"html": "test", //内容
+	"endgo": "", //结束后执行
 	"msg": {
 		"msg": "",
 		"class": "",
-		"time": "2000",
+		"time": "",
 	},
 	"not": {
 		"id": "",
@@ -90,9 +91,12 @@ var pintuer = {
 				pintuer.msg.class = val.class.length > 0 ? val.class : pintuer.msg.class;
 				pintuer.msg.msg = val.msg.length > 0 ? val.msg : pintuer.msg.msg;
 				pintuer.msg.time = val.time.length > 0 ? val.time : pintuer.msg.time;
+				pintuer.endgo = typeof val.end === 'function' ? val.end : pintuer.endgo;
 			} else {
 				pintuer.msg.class = "";
 				pintuer.msg.msg = val;
+				pintuer.msg.time = "2000";
+				pintuer.endgo = "";
 			}
 		}
 
@@ -103,7 +107,7 @@ var pintuer = {
 			"skin": "layer-msg", //设置皮肤
 			"html": html, //设置内容
 		});
-		pintuer.animate(pintuer.msg.time);
+		pintuer.animate(pintuer.msg.time, pintuer.endgo);
 	},
 	not: function(val) {
 		//无数据提示
@@ -178,10 +182,16 @@ var pintuer = {
 		pintuer.show();
 		*/
 	},
-	animate: function(time) {
+	end: function(fn) {
+		if(typeof fn === 'function') {
+			fn();
+		}
+	},
+	animate: function(time, endgo) {
 		pintuer.show();
 		setTimeout(function() {
 			pintuer.hide();
+			pintuer.end(endgo);
 		}, time);
 	},
 	show: function() {

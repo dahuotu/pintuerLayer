@@ -15,6 +15,7 @@
 		<div id="demo">
 			<button id="btnTest1">默认风格测试</button>
 			<button id="btnTest2">自定义风格，时间消息提示测试</button>
+			<button id="btnTest3">自定义风格，提示结束后执行操作</button>
 		</div>
 		<!--
 		<div class="pintuer-layer">
@@ -25,6 +26,7 @@
 		</div>
 		-->
 	</body>
+	<!--<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>-->
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/pintuer.layer.m.js"></script>
 	<script>
@@ -37,6 +39,18 @@
 				"class": "small",
 				"msg": "牛叉",
 				"time": "1500",
+			});
+		});
+		
+		$("#btnTest3").click(function() {
+			pintuer.msg({
+				"class": "small",
+				"msg": "牛叉",
+				"time": "5000",
+				"end": function() {
+					//提示结束后执行跳转等操作
+					console.log(42);
+				}
 			});
 		});
 	</script>
