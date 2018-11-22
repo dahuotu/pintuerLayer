@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<title>加载提示</title>
+		<title>Loading加载</title>
 		<link rel="stylesheet" href="css/pintuer.layer.m.css" />
 		<script type="text/javascript" src="js/pintuer.layer.m.js"></script>
 		<style type="text/css">
@@ -14,23 +14,28 @@
 
 	<body>
 		<div id="demo">
-			<button id="btnTest1">全屏加载</button>
-			<button id="btnTest2">局部加载</button>
+			<button id="btnTest1">默认全屏loading</button>
+			<button id="btnTest2">自定义样式及文字全屏显示loading</button>
+			<button id="btnTest3">指定元素局部显示loadding</button>
 		</div>
 		<div id="demo-penal">
-			
+
 		</div>
 		<!--
 		<div class="pintuer-layer">
-			<div class="mask"></div>
-			<div class="layer layer-loading">
+			<div class="mask show"></div>
+			<div class="layer layer-loading show">
 				<div class="loading">
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
+			        <span></span>
+			        <span></span>
+			        <span></span>
+			        <span></span>
+			        <span></span>
+			        <span></span>
+			        <span></span>
+			        <span></span>
 				</div>
+				<div class="msg">加载中</div>
 			</div>
 		</div>
 		-->
@@ -39,16 +44,25 @@
 	<script type="text/javascript" src="js/pintuer.layer.m.js"></script>
 	<script>
 		$("#btnTest1").click(function() {
-			pintuer.dialogLoading();
+			pintuer.loading();
 		});
-		
+
 		$("#btnTest2").click(function() {
-			pintuer.dialogLoading({
-				"id": "#demo-penal",
+			pintuer.loading({
+				"class": "loading",
+				"msg": "加载中..."
 			});
 		});
-		
+
+		$("#btnTest3").click(function() {
+			pintuer.loading({
+				"id": "#demo-penal",
+				"class": "loading",
+				"msg": "加载中"
+			});
+		});
 	</script>
+
 </html>
 <!--
 	作者：1979788761@qq.com

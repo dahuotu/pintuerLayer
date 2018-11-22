@@ -60,6 +60,11 @@ var pintuer = {
 		"class": "",
 		"time": "",
 	},
+	"loading": {
+		"id": "",
+		"msg": "",
+		"class": "",
+	},
 	"not": {
 		"id": "",
 		"msg": "",
@@ -148,39 +153,62 @@ var pintuer = {
 		pintuer.show();
 	},
 	loading: function(val) {
-		/*
-		var baseHtml = "";
-		if(pintuer.isjson(val) == false || val == undefined) {
-			baseHtml += "<div class=\"pintuer-layer\">";
-			baseHtml += "    <div class=\"mask\"></div>";
-			baseHtml += "    <div class=\"layer layer-loading\">";
-			baseHtml += "        <div class=\"loading\">";
-			baseHtml += "            <span></span>";
-			baseHtml += "            <span></span>";
-			baseHtml += "            <span></span>";
-			baseHtml += "            <span></span>";
-			baseHtml += "            <span></span>";
-			baseHtml += "        </div>";
-			baseHtml += "    </div>";
-			baseHtml += "</div>";
-			$("body").append(baseHtml);
-		} else {
-			baseHtml += "<div class=\"pintuer-layer\">";
-			baseHtml += "    <div class=\"layer layer-loading\" style=\"position: relative;width: 100%;height: 6.4rem;\">";
-			baseHtml += "        <div class=\"loading\">";
-			baseHtml += "            <span></span>";
-			baseHtml += "            <span></span>";
-			baseHtml += "            <span></span>";
-			baseHtml += "            <span></span>";
-			baseHtml += "            <span></span>";
-			baseHtml += "        </div>";
-			baseHtml += "    </div>";
-			baseHtml += "</div>";
-			pintuer.id = val.id;
-			$(pintuer.id).html(baseHtml);
+		//loading加载
+		if(val != undefined) {
+			if(pintuer.isjson(val) != false) {
+				//参数赋值
+				if(val.id == undefined) {
+					pintuer.loading.id = "";
+					pintuer.loading.class = val.class.length > 0 ? val.class : pintuer.loading.class;
+					pintuer.loading.msg = val.msg.length > 0 ? val.msg : pintuer.loading.msg;
+				} else {
+					pintuer.loading.id = val.id.length > 0 ? val.id : pintuer.loading.id;
+					pintuer.loading.class = val.class.length > 0 ? val.class : pintuer.loading.class;
+					pintuer.loading.msg = val.msg.length > 0 ? val.msg : pintuer.loading.msg;
+				}
+			} else {
+				pintuer.loading.id = "";
+				pintuer.loading.class = "loading";
+				pintuer.loading.msg = val;
+			}
+		}
+		else{
+			pintuer.loading.class = "loading";
+			pintuer.loading.msg = "";
+		}
+		var html = "";
+		html += "<div class=\"" + pintuer.loading.class + "\">";
+		html += "  	 <span></span>";
+		html += "    <span></span>";
+		html += "    <span></span>";
+		html += "    <span></span>";
+		html += "    <span></span>";
+		html += "    <span></span>";
+		html += "    <span></span>";
+		html += "    <span></span>";
+		html += "</div>";
+		html += "<div class=\"msg\">" + pintuer.loading.msg + "</div>";
+		
+		if(val != undefined) {
+			if(pintuer.loading.id.length <= 0) {
+				pintuer.base({
+					"mask": "show", //是否显示遮罩层及配置遮罩层效果
+					"skin": "layer-loading", //设置皮肤
+					"html": html, //设置内容
+				});
+			} else {
+				var shtml = "    <div class=\"layer layer-loading\" style=\"margin-top:2rem;\">" + html + "</div>";
+				$(pintuer.loading.id).html(shtml);
+			}
+		}
+		else{
+			pintuer.base({
+				"mask": "show", //是否显示遮罩层及配置遮罩层效果
+				"skin": "layer-loading", //设置皮肤
+				"html": html, //设置内容
+			});
 		}
 		pintuer.show();
-		*/
 	},
 	end: function(fn) {
 		if(typeof fn === 'function') {

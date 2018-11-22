@@ -1,8 +1,10 @@
 /*基础*/
+
 .pintuer-layer {}
 
 
 /*主要容器*/
+
 .pintuer-layer .mask,
 .pintuer-layer .layer {
 	display: none;
@@ -13,20 +15,28 @@
 	position: fixed;
 }
 
+
 /*遮罩层*/
+
 .pintuer-layer .mask {
 	z-index: 888;
 }
 
+
 /*内容层*/
+
 .pintuer-layer .layer {
 	z-index: 999;
 }
+
+
 /*基础层*/
-.layer-base {
-}
+
+.layer-base {}
+
 
 /*消息提示*/
+
 .layer-msg {
 	justify-content: center;
 	align-items: center;
@@ -36,6 +46,7 @@
 
 
 /*默认消息提醒样式*/
+
 .layer-msg .msg {
 	width: auto;
 	height: auto;
@@ -56,6 +67,7 @@
 
 
 /*精美小样式*/
+
 .layer .small {
 	min-height: 0.8rem;
 	line-height: 0.8rem;
@@ -67,57 +79,108 @@
 	height: auto;
 	max-height: 0.8rem;
 }
+
+
 /*默认加载loading样式*/
-.layer-loading{
+
+.layer-loading {
 	justify-content: center;
 	align-items: center;
 	display: -webkit-flex;
-	display: none;
 	background: #fff;
 }
 
-.layer-loading .loading{
-	width: 50%;
-	height: 0.35rem;
-	margin: 0 auto;
+.layer-loading .loading {
+	width: 1rem;
+	height: 1rem;
 	position: relative;
+	margin: 0 auto;
+	margin-top: -1rem;
 }
-.layer-loading .loading span{
+.layer-loading .msg {
+	color: #999999;
+	font-size: 0.28rem;
+	text-align: center;
+	width: 100%;
 	position: absolute;
-	width: 15px;
-	height: 100%;
+	margin: 0 auto;
+	margin-top: 0.75rem;
+}
+
+.layer-loading .loading span {
+	display: inline-block;
+	width: 0.16rem;
+	height: 0.16rem;
 	border-radius: 50%;
 	background: lightgreen;
-	-webkit-animation: load 1.04s ease-in infinite alternate;
+	position: absolute;
+	-webkit-animation: load 1.04s ease infinite;
 }
-@-webkit-keyframes load{
-	0%{
+
+@-webkit-keyframes load {
+	0% {
 		opacity: 1;
-		-webkit-transform: translate(0px);
 	}
-	100%{
+	100% {
 		opacity: 0.2;
-		-webkit-transform: translate(150px);
 	}
 }
-.layer-loading .loading span:nth-child(1){
-	-webkit-animation-delay:0.13s;
+
+.layer-loading .loading span:nth-child(1) {
+	left: 0;
+	top: 50%;
+	margin-top: -0.08rem;
+	-webkit-animation-delay: 0.13s;
 }
-.layer-loading .loading span:nth-child(2){
-	-webkit-animation-delay:0.26s;
+
+.layer-loading .loading span:nth-child(2) {
+	left: 0.14rem;
+	top: 0.14rem;
+	-webkit-animation-delay: 0.26s;
 }
-.layer-loading .loading span:nth-child(3){
-	-webkit-animation-delay:0.39s;
+
+.layer-loading .loading span:nth-child(3) {
+	left: 50%;
+	top: 0;
+	margin-left: -0.08rem;
+	-webkit-animation-delay: 0.39s;
 }
-.layer-loading .loading span:nth-child(4){
-	-webkit-animation-delay:0.52s;
+
+.layer-loading .loading span:nth-child(4) {
+	top: 0.14rem;
+	right: 0.14rem;
+	-webkit-animation-delay: 0.52s;
 }
-.layer-loading .loading span:nth-child(5){
-	-webkit-animation-delay:0.65s;
+
+.layer-loading .loading span:nth-child(5) {
+	right: 0;
+	top: 50%;
+	margin-top: -0.08rem;
+	-webkit-animation-delay: 0.65s;
+}
+
+.layer-loading .loading span:nth-child(6) {
+	right: 0.14rem;
+	bottom: 0.14rem;
+	-webkit-animation-delay: 0.78s;
+}
+
+.layer-loading .loading span:nth-child(7) {
+	bottom: 0;
+	left: 50%;
+	margin-left: -0.08rem;
+	-webkit-animation-delay: 0.91s;
+}
+
+.layer-loading .loading span:nth-child(8) {
+	bottom: 0.14rem;
+	left: 0.14rem;
+	-webkit-animation-delay: 1.04s;
 }
 
 
 /*无数据相关提示*/
+
 .layer-not {
 	justify-content: center;
 	align-items: center;
@@ -126,6 +189,7 @@
 
 
 /*无数据提醒样式*/
+
 .layer-not .notdata {
 	padding: 0.5rem;
 }
@@ -146,8 +210,9 @@
 	margin-top: 0.38rem;
 }
 
+
 /*动画及操作*/
-.pintuer-layer .show{
+
+.pintuer-layer .show {
 	display: -webkit-flex;
 }
-
