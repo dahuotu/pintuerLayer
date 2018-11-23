@@ -198,7 +198,7 @@
 	/*没有数据默认提示样式*/
 	width: 2.28rem;
 	height: 1.92rem;
-	background: url('../img/icon-nodata.png') #fff no-repeat;
+	background: url('../img/icon-nodata.png') no-repeat;
 	background-size: cover;
 }
 
