@@ -1,32 +1,37 @@
 /*基础*/
 
-.pintuer-layer {}
-
-
-/*主要容器*/
-
-.pintuer-layer .mask,
-.pintuer-layer .layer {
-	display: none;
+#pintuer-layer-mask,
+#pintuer-layer-layer {
 	top: 0;
 	left: 0;
 	bottom: 0;
 	right: 0;
 	position: fixed;
+	display: block;
 }
 
 
 /*遮罩层*/
 
-.pintuer-layer .mask {
+#pintuer-layer-mask {
 	z-index: 888;
 }
 
 
 /*内容层*/
 
-.pintuer-layer .layer {
+#pintuer-layer-layer {
 	z-index: 999;
+	justify-content: center;
+	align-items: center;
+	display: -webkit-flex;
+}
+
+
+/*页面层*/
+
+.layer-page {
+	background: #fff;
 }
 
 
@@ -44,10 +49,8 @@
 	display: none;
 }
 
-
-/*默认消息提醒样式*/
-
 .layer-msg .msg {
+	/*默认消息提醒样式*/
 	width: auto;
 	height: auto;
 	border-radius: 0.2rem;
@@ -65,10 +68,8 @@
 	display: -webkit-flex;
 }
 
-
-/*精美小样式*/
-
-.layer .small {
+.layer-msg .small {
+	/*精美小样式*/
 	min-height: 0.8rem;
 	line-height: 0.8rem;
 	max-width: 70%;
@@ -97,6 +98,7 @@
 	margin: 0 auto;
 	margin-top: -1rem;
 }
+
 .layer-loading .msg {
 	color: #999999;
 	font-size: 0.28rem;
@@ -114,10 +116,10 @@
 	border-radius: 50%;
 	background: lightgreen;
 	position: absolute;
-	-webkit-animation: load 1.04s ease infinite;
+	-webkit-animation: loading 1.04s ease infinite;
 }
 
-@-webkit-keyframes load {
+@-webkit-keyframes loading {
 	0% {
 		opacity: 1;
 	}
@@ -211,8 +213,91 @@
 }
 
 
-/*动画及操作*/
+/*操作*/
 
-.pintuer-layer .show {
+.js-show {
 	display: -webkit-flex;
+}
+
+.js-hide {
+	display: none;
+}
+
+
+/*动画*/
+
+.js-down {
+	/*向下滑出默认样式*/
+	opacity: 1;
+	transition-property: all;
+	transition-duration: 333ms;
+	transition-timing-function: ease;
+	transform: translateY(-100%);
+}
+
+.js-down-inview {
+	/*激活向下滑出*/
+	visibility: visible;
+	opacity: 1;
+	transform: translate(0, 0) scale(1);
+	transition-property: all;
+	transition-duration: 333ms;
+	transition-timing-function: ease;
+}
+
+.js-up {
+	/*向上滑出默认样式*/
+	opacity: 1;
+	transition-property: all;
+	transition-duration: 333ms;
+	transition-timing-function: ease;
+	transform: translateY(100%);
+}
+
+.js-up-inview {
+	/*激活向上滑出*/
+	visibility: visible;
+	opacity: 1;
+	transform: translate(0, 0) scale(1);
+	transition-property: all;
+	transition-duration: 333ms;
+	transition-timing-function: ease;
+}
+
+.js-left {
+	/*向左滑出默认样式*/
+	opacity: 1;
+	transition-property: all;
+	transition-duration: 333ms;
+	transition-timing-function: ease;
+	transform: translateX(-100%);
+}
+
+.js-left-inview {
+	/*激活向左滑出*/
+	visibility: visible;
+	opacity: 1;
+	transform: translate(0, 0) scale(1);
+	transition-property: all;
+	transition-duration: 333ms;
+	transition-timing-function: ease;
+}
+
+.js-right {
+	/*向右滑出默认样式*/
+	opacity: 1;
+	transition-property: all;
+	transition-duration: 333ms;
+	transition-timing-function: ease;
+	transform: translateX(100%);
+}
+
+.js-right-inview {
+	/*激活向右滑出*/
+	visibility: visible;
+	opacity: 1;
+	transform: translate(0, 0) scale(1);
+	transition-property: all;
+	transition-duration: 333ms;
+	transition-timing-function: ease;
 }

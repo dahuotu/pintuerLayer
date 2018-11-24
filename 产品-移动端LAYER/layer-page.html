@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>全屏层</title>
+		<link rel="stylesheet" href="css/pintuer.layer.m.css" />
+		<script type="text/javascript" src="js/pintuer.layer.m.js"></script>
+		<style type="text/css">
+			.page {
+				display: none;
+				border: 1px solid red;
+				width: 100%;
+				height: 5rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="demo">
+			<button id="btnTest1">整页全屏层</button>
+			<button id="btnTest2">自定义风格基础层</button>
+		</div>
+		<div class="page" onclick="pintuer.close()">
+			这个是整页全屏的测试
+		</div>
+		<!--
+		<div id="pintuer-layer-mask" class="hide"></div>
+		<div id="pintuer-layer-layer" class="layer-page hide">
+			全屏内容
+		</div>
+		-->
+	</body>
+	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript" src="js/pintuer.layer.m.js"></script>
+	<script>
+		$("#btnTest1").click(function() {
+			pintuer.page({
+				"id": ".page",
+			});
+		});
+
+		$("#btnTest2").click(function() {
+			pintuer.page({
+				"id": ".page", //需要全屏显示的层编号#id或样式.class
+				"mask": "js-hide", //是否显示遮罩层及配置遮罩层效果
+				"animated": "js-down", //展示动画
+			});
+		});
+	</script>
+
+</html>

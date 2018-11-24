@@ -52,8 +52,8 @@
 
 var pintuer = {
 	"skin": "layer-base", //皮肤 基础样式
-	"mask": "show", //显示遮罩层样式
-	"html": "test", //内容
+	"mask": "js-show", //显示遮罩层样式
+	"html": "", //内容
 	"endgo": "", //结束后执行
 	"msg": {
 		"msg": "",
@@ -70,6 +70,10 @@ var pintuer = {
 		"msg": "",
 		"class": "",
 	},
+	"page": {
+		"id": "",
+		"animated": "js-show",
+	},
 	base: function(val) {
 		var baseHtml = "";
 		if(val != undefined) {
@@ -82,10 +86,8 @@ var pintuer = {
 				console.log('error:不正确的调用参数json(' + val + ')');
 			}
 		}
-		baseHtml += "<div class=\"pintuer-layer\" onclick=\"pintuer.hide()\">";
-		baseHtml += "    <div class=\"mask " + pintuer.mask + "\"></div>";
-		baseHtml += "    <div class=\"layer " + pintuer.skin + "\">" + pintuer.html + "</div>";
-		baseHtml += "</div>";
+		baseHtml += '<div id="pintuer-layer-mask" class="' + pintuer.mask + '" onclick="pintuer.hide()"></div>';
+		baseHtml += '<div id="pintuer-layer-layer" class="' + pintuer.skin + '">' + pintuer.html + '</div>';
 
 		pintuer.append('', baseHtml);
 	},
@@ -108,7 +110,7 @@ var pintuer = {
 		var html = "<div class=\"msg " + pintuer.msg.class + "\">" + pintuer.msg.msg + "</div>";
 
 		pintuer.base({
-			"mask": "hide", //是否显示遮罩层及配置遮罩层效果
+			"mask": "js-hide", //是否显示遮罩层及配置遮罩层效果
 			"skin": "layer-msg", //设置皮肤
 			"html": html, //设置内容
 		});
@@ -142,7 +144,7 @@ var pintuer = {
 
 		if(pintuer.not.id.length <= 0) {
 			pintuer.base({
-				"mask": "show", //是否显示遮罩层及配置遮罩层效果
+				"mask": "js-show", //是否显示遮罩层及配置遮罩层效果
 				"skin": "layer-not", //设置皮肤
 				"html": html, //设置内容
 			});
@@ -171,8 +173,7 @@ var pintuer = {
 				pintuer.loading.class = "loading";
 				pintuer.loading.msg = val;
 			}
-		}
-		else{
+		} else {
 			pintuer.loading.class = "loading";
 			pintuer.loading.msg = "";
 		}
@@ -188,27 +189,43 @@ var pintuer = {
 		html += "    <span></span>";
 		html += "</div>";
 		html += "<div class=\"msg\">" + pintuer.loading.msg + "</div>";
-		
+
 		if(val != undefined) {
 			if(pintuer.loading.id.length <= 0) {
 				pintuer.base({
-					"mask": "show", //是否显示遮罩层及配置遮罩层效果
+					"mask": "js-show", //是否显示遮罩层及配置遮罩层效果
 					"skin": "layer-loading", //设置皮肤
 					"html": html, //设置内容
 				});
 			} else {
-				var shtml = "    <div class=\"layer layer-loading\" style=\"margin-top:2rem;\">" + html + "</div>";
+				var shtml = "    <div class=\"layer-loading\" style=\"margin-top:2rem;\">" + html + "</div>";
 				$(pintuer.loading.id).html(shtml);
 			}
-		}
-		else{
+		} else {
 			pintuer.base({
-				"mask": "show", //是否显示遮罩层及配置遮罩层效果
+				"mask": "js-show", //是否显示遮罩层及配置遮罩层效果
 				"skin": "layer-loading", //设置皮肤
 				"html": html, //设置内容
 			});
 		}
 		pintuer.show();
+	},
+	page: function(val) {
+		if(val != undefined) {
+			if(pintuer.isjson(val) != false) {
+				//参数赋值
+				if(val.id != undefined) {
+					pintuer.page.id = val.id;
+					pintuer.page.mask = val.mask == undefined ? pintuer.mask : val.mask;
+					pintuer.page.animated = val.animated == undefined ? "js-show" : val.animated;
+					$(pintuer.page.id).wrap('<div id="pintuer-layer-layer" class="layer-page ' + pintuer.page.animated + '"></div>').show();
+					if(pintuer.page.mask == "js-show") {
+						$("body").append('<div id="pintuer-layer-mask" class="' + pintuer.page.mask + '" onclick="pintuer.close()"></div>');
+					}
+					pintuer.open();
+				}
+			}
+		}
 	},
 	end: function(fn) {
 		if(typeof fn === 'function') {
@@ -224,12 +241,30 @@ var pintuer = {
 	},
 	show: function() {
 		//显示层
-		$(".pintuer-layer .mask,.pintuer-layer .layer").addClass("show");
+		$("#pintuer-layer-mask,#pintuer-layer-layer").show();
 	},
 	hide: function() {
+		console.log(267);
 		//隐藏层
-		$(".pintuer-layer .mask,.pintuer-layer .layer").removeClass("show");
+		$("#pintuer-layer-mask,#pintuer-layer-layer").hide();
 		pintuer.remove('');
+	},
+	open: function() {
+		if(pintuer.page.animated != "js-show") {
+			$("#pintuer-layer-layer").addClass(pintuer.page.animated + "-inview");
+		}
+	},
+	close: function() {
+		//关闭页面层
+		if(pintuer.page.animated != "js-show") {
+			$("#pintuer-layer-layer").removeClass(pintuer.page.animated + "-inview").on("transitionend", function() {
+				$("#pintuer-layer-layer " + pintuer.page.id).unwrap('<div id="pintuer-layer-layer" class="layer-page ' + pintuer.page.animated + '"></div>').hide();
+				$("#pintuer-layer-mask").remove();
+			});
+		} else {
+			$("#pintuer-layer-layer " + pintuer.page.id).unwrap('<div id="pintuer-layer-layer" class="layer-page ' + pintuer.page.animated + '"></div>').hide();
+			$("#pintuer-layer-mask").remove();
+		}
 	},
 	append: function(val, htm) {
 		var ap = val.length > 0 ? val : '';
@@ -237,7 +272,7 @@ var pintuer = {
 	},
 	remove: function(val) {
 		var re = val.length > 0 ? val : '';
-		$(".pintuer-layer " + re).remove();
+		$("#pintuer-layer-mask,#pintuer-layer-layer " + re).remove();
 	},
 	isjson: function(str) {
 		if(typeof str == 'string') {
