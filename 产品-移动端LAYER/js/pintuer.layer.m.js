@@ -244,20 +244,24 @@ var pintuer = {
 		$("#pintuer-layer-mask,#pintuer-layer-layer").show();
 	},
 	hide: function() {
-		console.log(267);
 		//隐藏层
 		$("#pintuer-layer-mask,#pintuer-layer-layer").hide();
 		pintuer.remove('');
 	},
 	open: function() {
 		if(pintuer.page.animated != "js-show") {
+			//此处有BUG先记录
 			$("#pintuer-layer-layer").addClass(pintuer.page.animated + "-inview");
+			$("#pintuer-layer-layer").on("transitionend", function() {
+				
+			});
 		}
 	},
 	close: function() {
 		//关闭页面层
 		if(pintuer.page.animated != "js-show") {
-			$("#pintuer-layer-layer").removeClass(pintuer.page.animated + "-inview").on("transitionend", function() {
+			$("#pintuer-layer-layer").removeClass(pintuer.page.animated + "-inview");
+			$("#pintuer-layer-layer").on("transitionend", function() {
 				$("#pintuer-layer-layer " + pintuer.page.id).unwrap('<div id="pintuer-layer-layer" class="layer-page ' + pintuer.page.animated + '"></div>').hide();
 				$("#pintuer-layer-mask").remove();
 			});
