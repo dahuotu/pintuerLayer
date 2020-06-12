@@ -183,7 +183,7 @@
 
 /*无数据相关提示*/
 
-.layer-not {
+.layer-empty {
 	justify-content: center;
 	align-items: center;
 	display: -webkit-flex;
@@ -192,11 +192,11 @@
 
 /*无数据提醒样式*/
 
-.layer-not .notdata {
+.layer-empty .notdata {
 	padding: 0.5rem;
 }
 
-.layer-not .notdata .pic {
+.layer-empty .notdata .pic {
 	/*没有数据默认提示样式*/
 	width: 2.28rem;
 	height: 1.92rem;
@@ -204,7 +204,7 @@
 	background-size: cover;
 }
 
-.layer-not .notdata .msg {
+.layer-empty .notdata .msg {
 	width: 100%;
 	color: #999999;
 	font-size: 0.32rem;

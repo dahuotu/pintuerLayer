@@ -24,7 +24,7 @@
 		<!--
 		<div class="pintuer-layer">
 			<div class="mask"></div>
-			<div class="layer layer-not">
+			<div class="layer layer-empty">
 				<div class="notdata">
 					<div class="pic"></div>
 					<div class="msg">暂无数据</div>
@@ -37,18 +37,18 @@
 	<script type="text/javascript" src="js/pintuer.layer.m.js"></script>
 	<script>
 		$("#btnTest1").click(function() {
-			pintuer.not("暂无数据");
+			pintuer.empty("暂无数据");
 		});
 
 		$("#btnTest2").click(function() {
-			pintuer.not({
+			pintuer.empty({
 				"class": "notdata",
 				"msg": "真的暂无数据"
 			});
 		});
 
 		$("#btnTest3").click(function() {
-			pintuer.not({
+			pintuer.empty({
 				"id": "#demo-penal",
 				"class": "notdata",
 				"msg": "真的暂无数据"

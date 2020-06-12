@@ -65,7 +65,7 @@ var pintuer = {
 		"msg": "",
 		"class": "",
 	},
-	"not": {
+	"empty": {
 		"id": "",
 		"msg": "",
 		"class": "",
@@ -116,41 +116,41 @@ var pintuer = {
 		});
 		pintuer.animate(pintuer.msg.time, pintuer.endgo);
 	},
-	not: function(val) {
+	empty: function(val) {
 		//无数据提示
 		if(val != undefined) {
 			if(pintuer.isjson(val) != false) {
 				//参数赋值
 				if(val.id == undefined) {
-					pintuer.not.id = "";
-					pintuer.not.class = val.class.length > 0 ? val.class : pintuer.not.class;
-					pintuer.not.msg = val.msg.length > 0 ? val.msg : pintuer.not.msg;
+					pintuer.empty.id = "";
+					pintuer.empty.class = val.class.length > 0 ? val.class : pintuer.empty.class;
+					pintuer.empty.msg = val.msg.length > 0 ? val.msg : pintuer.empty.msg;
 				} else {
-					pintuer.not.id = val.id.length > 0 ? val.id : pintuer.not.id;
-					pintuer.not.class = val.class.length > 0 ? val.class : pintuer.not.class;
-					pintuer.not.msg = val.msg.length > 0 ? val.msg : pintuer.not.msg;
+					pintuer.empty.id = val.id.length > 0 ? val.id : pintuer.empty.id;
+					pintuer.empty.class = val.class.length > 0 ? val.class : pintuer.empty.class;
+					pintuer.empty.msg = val.msg.length > 0 ? val.msg : pintuer.empty.msg;
 				}
 			} else {
-				pintuer.not.id = "";
-				pintuer.not.class = "notdata";
-				pintuer.not.msg = val;
+				pintuer.empty.id = "";
+				pintuer.empty.class = "notdata";
+				pintuer.empty.msg = val;
 			}
 		}
 		var html = "";
-		html += "<div class=\"" + pintuer.not.class + "\">";
+		html += "<div class=\"" + pintuer.empty.class + "\">";
 		html += "	<div class=\"pic\"></div>";
-		html += "	<div class=\"msg\">" + pintuer.not.msg + "</div>";
+		html += "	<div class=\"msg\">" + pintuer.empty.msg + "</div>";
 		html += "</div>";
 
-		if(pintuer.not.id.length <= 0) {
+		if(pintuer.empty.id.length <= 0) {
 			pintuer.base({
 				"mask": "js-show", //是否显示遮罩层及配置遮罩层效果
-				"skin": "layer-not", //设置皮肤
+				"skin": "layer-empty", //设置皮肤
 				"html": html, //设置内容
 			});
 		} else {
-			var shtml = "    <div class=\"layer layer-not\">" + html + "</div>";
-			$(pintuer.not.id).html(shtml);
+			var shtml = "    <div class=\"layer layer-empty\">" + html + "</div>";
+			$(pintuer.empty.id).html(shtml);
 		}
 		pintuer.show();
 	},
@@ -253,7 +253,7 @@ var pintuer = {
 			//此处有BUG先记录
 			$("#pintuer-layer-layer").addClass(pintuer.page.animated + "-inview");
 			$("#pintuer-layer-layer").on("transitionend", function() {
-				
+
 			});
 		}
 	},
